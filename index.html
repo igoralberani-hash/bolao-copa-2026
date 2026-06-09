@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bolão Copa 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{
+      --bg:#07111f;--panel:#0f1b2e;--card:#14243b;--card2:#0b1627;--text:#f8fafc;--muted:#9fb0c8;
+      --blue:#38bdf8;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--line:rgba(255,255,255,.09);
+      --gold:#facc15;--silver:#cbd5e1;--bronze:#d97706;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',Arial,'Segoe UI',sans-serif}
+    body{background:radial-gradient(circle at top right,#1e1b4b,#07111f 55%);color:var(--text);min-height:100vh;font-size:18px}
+    button,input,select{font-size:18px}
+    .login{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at bottom left,#172554,#07111f 70%);z-index:50}
+    .login-card{width:100%;max-width:460px;background:rgba(20,36,59,.88);border:1px solid rgba(56,189,248,.22);border-radius:22px;padding:30px;box-shadow:0 22px 60px rgba(0,0,0,.45)}
+    .login-card h1{text-align:center;color:var(--blue);font-size:30px;margin-bottom:8px}.hint{text-align:center;color:var(--muted);margin-bottom:22px;font-size:16px}
+    label{display:block;margin:14px 0 8px;color:#cbd5e1;font-weight:700}.input,.select{width:100%;background:#07111f;color:#fff;border:2px solid var(--line);border-radius:14px;padding:16px;outline:none;min-height:56px}.input:focus,.select:focus{border-color:var(--blue)}
+    .pin{text-align:center;letter-spacing:7px}.btn{border:0;border-radius:14px;padding:16px 18px;min-height:58px;font-weight:800;cursor:pointer;display:flex;gap:10px;align-items:center;justify-content:center;transition:.2s;width:100%}.btn:disabled{opacity:.55;cursor:not-allowed}.btn-primary{background:linear-gradient(135deg,#0ea5e9,#2563eb);color:#fff}.btn-green{background:var(--green);color:#02110a}.btn-outline{background:transparent;color:var(--green);border:2px solid var(--green)}.btn-red{background:linear-gradient(135deg,#ef4444,#991b1b);color:#fff;border:2px solid rgba(239,68,68,.75)}.btn-small{width:auto;min-height:46px;padding:10px 15px;font-size:15px;border-radius:999px}
+    .cadastro-link{display:block;text-align:center;color:var(--green);font-weight:800;text-decoration:none;margin-top:18px}.cadastro{display:none;border-top:1px solid var(--line);margin-top:20px;padding-top:18px}
+    .app{display:none;min-height:100vh}.sidebar{width:285px;background:rgba(8,15,28,.92);border-right:1px solid var(--line);padding:24px 18px;position:fixed;left:0;top:0;bottom:0;display:flex;flex-direction:column;gap:12px}.brand{text-align:center;color:var(--blue);font-weight:900;font-size:22px;margin-bottom:4px}.user{text-align:center;color:var(--green);font-size:15px;margin-bottom:12px}.navbtn{width:100%;background:transparent;border:2px solid rgba(56,189,248,.25);color:#cbd5e1;border-radius:14px;min-height:56px;padding:14px;text-align:left;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:12px}.navbtn.active,.navbtn:hover{border-color:var(--blue);background:rgba(56,189,248,.13);color:#fff}.content{margin-left:285px;padding:28px;min-height:100vh}.screen{display:none}.screen.active{display:block}.card{background:rgba(20,36,59,.86);border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:0 15px 35px rgba(0,0,0,.35);max-width:1160px;margin:0 auto}.card.narrow{max-width:850px}h2{font-size:30px;margin-bottom:8px;display:flex;gap:12px;align-items:center}h2 i{color:var(--blue)}.subtitle{color:var(--muted);font-size:16px;margin-bottom:22px;line-height:1.45}.hero{text-align:center;background:linear-gradient(135deg,rgba(56,189,248,.13),rgba(250,204,21,.10));border:1px solid var(--line);border-radius:20px;padding:24px;margin-bottom:24px}.hero .cup{font-size:68px;margin-bottom:8px}.rules{display:grid;gap:12px}.rule{background:#0b1627;border-left:5px solid var(--blue);border-radius:12px;padding:16px;line-height:1.45}.rule.important{border-left-color:var(--red);background:rgba(239,68,68,.12)}.rule.important strong{color:#fecaca}.rule strong{color:#fff}.tabs,.rounds{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}.tab,.round{background:#0b1627;border:1px solid var(--line);color:#cbd5e1;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer}.tab.active,.round.active{background:var(--blue);color:#06111f}.sub{display:none}.sub.active{display:block}.podio-form{display:grid;gap:16px}.field-card{background:#0b1627;border:1px solid var(--line);border-radius:16px;padding:16px}.field-card .title{font-weight:900;margin-bottom:10px}.locked{padding:14px;border-radius:14px;background:rgba(239,68,68,.13);border:1px solid rgba(239,68,68,.35);color:#fecaca;font-weight:800;margin:14px 0}.okbox{padding:14px;border-radius:14px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);color:#bbf7d0;font-weight:800;margin:14px 0}.games{display:grid;gap:14px;margin-bottom:18px}.match{background:#0b1627;border:1px solid var(--line);border-radius:18px;padding:16px}.match.locked-game{opacity:.72}.match-top{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:14px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px}.match-body{display:grid;grid-template-columns:1fr 70px 28px 70px 1fr;gap:10px;align-items:center}.teamA{text-align:right;font-weight:900}.teamB{text-align:left;font-weight:900}.score{width:70px;height:58px;border-radius:14px;border:2px solid var(--line);background:#07111f;color:#fff;text-align:center;font-size:24px;font-weight:900}.score:disabled{background:#111827;color:#94a3b8}.vs{text-align:center;color:var(--muted);font-weight:900}.status-mini{font-size:13px;margin-top:12px;color:#cbd5e1;text-align:center}.grid-galera{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}.galera-card{background:#0b1627;border:1px solid var(--line);border-radius:18px;padding:14px}.galera-head{font-size:14px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:8px;display:flex;justify-content:space-between;gap:10px}.galera-title{text-align:center;font-weight:900;margin:8px 0 12px}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:11px 8px;border-bottom:1px solid var(--line);font-size:16px}.table th{text-align:left;color:var(--blue);font-size:14px;text-transform:uppercase}.right{text-align:right}.pts{color:var(--green);font-weight:900}.export-area{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.podium{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin:25px auto 25px;min-height:230px}.step{width:155px;text-align:center}.name{font-size:15px;font-weight:900;margin-bottom:8px;white-space:normal;overflow:visible;text-overflow:clip;line-height:1.15;min-height:38px}.block{border-radius:16px 16px 0 0;padding:16px 8px;font-weight:900}.first .block{height:160px;background:linear-gradient(135deg,#facc15,#ca8a04);color:#111}.second .block{height:120px;background:linear-gradient(135deg,#cbd5e1,#64748b);color:#111}.third .block{height:95px;background:linear-gradient(135deg,#d97706,#92400e);color:#fff}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#020617;color:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px;box-shadow:0 14px 45px rgba(0,0,0,.45);display:none;z-index:100;max-width:92%;text-align:center}.loading{text-align:center;color:var(--blue);font-weight:900;padding:22px}
+    @media(max-width:820px){body{font-size:17px}.app{display:none;flex-direction:column}.sidebar{position:static;width:100%;border-right:0;border-bottom:1px solid var(--line);padding:16px}.navbtn{min-height:52px}.content{margin-left:0;padding:14px}.card{padding:18px;border-radius:18px}h2{font-size:25px}.match-body{grid-template-columns:1fr;gap:8px;text-align:center}.teamA,.teamB{text-align:center}.score{width:100%;max-width:130px;margin:0 auto}.vs{display:none}.match-top{flex-direction:column;text-align:center}.podium{gap:6px}.step{width:33%}.login-card{padding:22px}.tabs,.rounds{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}.tab,.round{white-space:nowrap}.btn{min-height:60px}.hero .cup{font-size:56px}}
+  </style>
+</head>
+<body>
+  <div id="toast" class="toast"></div>
+
+  <div id="login" class="login">
+    <div class="login-card">
+      <h1><i class="fa-solid fa-trophy"></i> Bolão Copa 2026</h1>
+      <p class="hint">Entre com seu nome e PIN de 4 dígitos.</p>
+      <label for="loginNome">Nome</label>
+      <input id="loginNome" class="input" placeholder="Ex: Priscila Alberani" autocomplete="name">
+      <label for="loginPin">PIN</label>
+      <input id="loginPin" class="input pin" type="password" inputmode="numeric" maxlength="4" placeholder="****">
+      <button id="btnLogin" class="btn btn-primary" onclick="executarLogin()"><i class="fa-solid fa-right-to-bracket"></i> Entrar</button>
+      <a class="cadastro-link" href="javascript:void(0)" onclick="toggleCadastro()"><i class="fa-solid fa-user-plus"></i> Não tem login? Cadastre aqui</a>
+      <div id="cadastro" class="cadastro">
+        <label for="cadNome">Nome para cadastro</label>
+        <input id="cadNome" class="input" placeholder="Seu nome">
+        <label for="cadPin">Crie um PIN com 4 números</label>
+        <input id="cadPin" class="input pin" type="password" inputmode="numeric" maxlength="4" placeholder="1234">
+        <button id="btnCadastro" class="btn btn-green" onclick="executarCadastro()"><i class="fa-solid fa-check"></i> Cadastrar e entrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="app" class="app">
+    <aside class="sidebar">
+      <div class="brand"><i class="fa-solid fa-futbol"></i> Menu Bolão</div>
+      <div id="userBox" class="user"></div>
+      <button class="navbtn active" onclick="navegar('inicio', this)"><i class="fa-solid fa-house"></i> Início & Regras</button>
+      <button class="navbtn" onclick="navegar('palpites', this)"><i class="fa-solid fa-bullseye"></i> Palpites</button>
+      <button class="navbtn" onclick="navegar('galera', this)"><i class="fa-solid fa-users"></i> Palpites da Galera</button>
+      <button class="navbtn" onclick="navegar('classificacao', this)"><i class="fa-solid fa-ranking-star"></i> Classificação</button>
+      <button class="navbtn btn-red" onclick="logout()" style="margin-top:auto"><i class="fa-solid fa-right-from-bracket"></i> Sair / Deslogar</button>
+    </aside>
+
+    <main class="content">
+      <section id="inicio" class="screen active">
+        <div class="card narrow">
+          <div class="hero"><div class="cup">🏆🌎</div><h2 style="justify-content:center">Bolão Copa do Mundo 2026</h2><p class="subtitle" style="margin:0">Faça seus palpites antes do início de cada partida.</p></div>
+          <h2><i class="fa-solid fa-book"></i> Regras de Pontuação</h2>
+          <div class="rules">
+            <div class="rule"><strong>Placar exato: 10 pontos</strong><br>Exemplo: Palpite 2x1 | Resultado 2x1.</div>
+            <div class="rule"><strong>Vencedor + placar de um dos times: 7 pontos</strong><br>Exemplo: Palpite 1x0 | Resultado 10x0. Acertou o vencedor e o placar do perdedor.</div>
+            <div class="rule"><strong>Resultado correto sem placar: 5 pontos</strong><br>Exemplo: Palpite 2x1 | Resultado 1x0, ou Palpite 1x1 | Resultado 0x0.</div>
+            <div class="rule"><strong>Campeão: 50 pontos</strong><br><strong>Vice-campeão: 25 pontos</strong><br>Esses palpites só podem ser feitos antes do primeiro jogo da Copa.</div>
+            <div class="rule important"><strong>Importante:</strong> os palpites dos jogos só podem ser salvos até o horário de início da partida.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="palpites" class="screen">
+        <div class="card">
+          <h2><i class="fa-solid fa-bullseye"></i> Dar Palpites</h2>
+          <p class="subtitle">Escolha campeão/vice e preencha os placares dos jogos.</p>
+          <div class="tabs"><button class="tab active" onclick="subAba('podio',this)">Campeão e Vice</button><button class="tab" onclick="subAba('jogos',this)">Jogos</button></div>
+          <div id="podio" class="sub active">
+            <div id="podioAviso"></div>
+            <div class="podio-form" id="podioForm">
+              <div class="field-card"><div class="title">🏆 Campeão</div><select id="selectCampeao" class="select"></select></div>
+              <div class="field-card"><div class="title">🥈 Vice-campeão</div><select id="selectVice" class="select"></select></div>
+              <button id="btnPodio" class="btn btn-outline" onclick="enviarPodio()"><i class="fa-solid fa-crown"></i> Salvar Campeão e Vice</button>
+            </div>
+          </div>
+          <div id="jogos" class="sub"><div id="roundsPalpites" class="rounds"></div><div id="listaJogos" class="games"></div><button id="btnSalvarJogos" class="btn btn-outline" onclick="enviarPalpitesJogos()"><i class="fa-solid fa-cloud-arrow-up"></i> Salvar Palpites da Rodada</button></div>
+        </div>
+      </section>
+
+      <section id="galera" class="screen">
+        <div class="card">
+          <h2><i class="fa-solid fa-users"></i> Palpites da Galera</h2>
+          <p class="subtitle">Veja os palpites de todos. Quando o jogo for encerrado, aparecem os pontos de cada pessoa.</p>
+          <div class="export-area"><button class="btn btn-primary btn-small" onclick="exportarJogosDoDia()"><i class="fa-brands fa-whatsapp"></i> Copiar jogos de hoje</button><button class="btn btn-outline btn-small" onclick="exportarRodadaGalera()"><i class="fa-solid fa-copy"></i> Copiar rodada selecionada</button><button class="btn btn-outline btn-small" onclick="mostrarFasesFinais()"><i class="fa-solid fa-sitemap"></i> Ver estrutura das fases finais</button></div>
+          <div class="field-card" style="margin-bottom:18px">
+            <div class="title">🏆 Campeão e vice da galera</div>
+            <div id="galeraPodio"></div>
+          </div>
+          <div id="roundsGalera" class="rounds"></div><div id="gridGalera" class="grid-galera"></div>
+        </div>
+      </section>
+
+      <section id="classificacao" class="screen">
+        <div class="card narrow">
+          <h2><i class="fa-solid fa-trophy"></i> Classificação</h2>
+          <p class="subtitle">Ranking atualizado conforme os resultados são preenchidos como encerrados na planilha.</p>
+          <div id="podium" class="podium"></div>
+          <table class="table"><thead><tr><th>Posição</th><th>Participante</th><th class="right">Pontos</th></tr></thead><tbody id="rankingBody"></tbody></table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script>
+  const URL_API = "https://script.google.com/macros/s/AKfycbwIDc1UHOGeFxZSO58vG3g9vVA-gt31sQsI3U7F-AljLCGMZj6nlL3E1G38mf-t3sCq/exec";
+  let usuarioLogado = localStorage.getItem('bolao_usuario') || '';
+  let banco = { selecoes: [], jogos: [], palpites: [], ranking: [], copaJaIniciou: false };
+  let rodadaPalpiteAtual = '';
+  let rodadaGaleraAtual = '';
+  let ultimaAtividade = Date.now();
+  const MINUTOS_SESSAO = 15;
+
+  ['click','keydown','touchstart'].forEach(ev=>document.addEventListener(ev,()=>ultimaAtividade=Date.now(),{passive:true}));
+  setInterval(()=>{if(usuarioLogado && Date.now()-ultimaAtividade>MINUTOS_SESSAO*60*1000){alert('Sua sessão expirou por segurança. Entre novamente.');logout();}},60000);
+  setInterval(()=>{if(usuarioLogado) carregarDados(false);},60000);
+
+  window.addEventListener('load', () => {
+    if (usuarioLogado) abrirApp(usuarioLogado);
+  });
+
+  function show(msg){const t=document.getElementById('toast');t.innerText=msg;t.style.display='block';setTimeout(()=>t.style.display='none',3500)}
+  function setBtn(id, loading, texto){const b=document.getElementById(id);if(!b)return;b.disabled=loading;b.innerHTML=loading?'<i class="fa-solid fa-spinner fa-spin"></i> Aguarde...':texto}
+  function toggleCadastro(){const c=document.getElementById('cadastro');c.style.display=c.style.display==='block'?'none':'block'}
+
+  function executarLogin(){
+    const nome=document.getElementById('loginNome').value.trim(); const pin=document.getElementById('loginPin').value.trim();
+    if(!nome || !/^\d{4}$/.test(pin)) return alert('Preencha seu nome e um PIN de 4 dígitos.');
+    setBtn('btnLogin',true,'<i class="fa-solid fa-right-to-bracket"></i> Entrar');
+    fetch(`${URL_API}?tipo=Login&nome=${encodeURIComponent(nome)}&codigo=${encodeURIComponent(pin)}&_=${Date.now()}`)
+      .then(r=>r.json()).then(res=>{ if(!res.sucesso) throw new Error(res.msg||'Login inválido'); localStorage.setItem('bolao_usuario',res.nomeOficial); abrirApp(res.nomeOficial); })
+      .catch(e=>alert('🚫 '+e.message)).finally(()=>setBtn('btnLogin',false,'<i class="fa-solid fa-right-to-bracket"></i> Entrar'));
+  }
+
+  function executarCadastro(){
+    const nome=document.getElementById('cadNome').value.trim(); const pin=document.getElementById('cadPin').value.trim();
+    if(!nome || !/^\d{4}$/.test(pin)) return alert('Informe nome e PIN com 4 números.');
+    setBtn('btnCadastro',true,'<i class="fa-solid fa-check"></i> Cadastrar e entrar');
+    fetch(URL_API,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({action:'novoCadastro',nome:nome,codigo:pin})})
+      .then(r=>r.json()).then(res=>{ if(!res.sucesso) throw new Error(res.erro||'Erro no cadastro'); localStorage.setItem('bolao_usuario',res.nomeOficial||nome); abrirApp(res.nomeOficial||nome); })
+      .catch(e=>alert('🚫 '+e.message)).finally(()=>setBtn('btnCadastro',false,'<i class="fa-solid fa-check"></i> Cadastrar e entrar'));
+  }
+
+  function abrirApp(nome){usuarioLogado=nome;document.getElementById('login').style.display='none';document.getElementById('app').style.display='flex';document.getElementById('userBox').innerHTML=`<i class="fa-solid fa-user-check"></i> Olá, ${nome}!`;carregarDados();}
+  function logout(){localStorage.removeItem('bolao_usuario');location.reload()}
+
+  function navegar(id,btn){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active'); if(id==='galera') montarGalera(); if(id==='classificacao') renderRanking();}
+  function subAba(id,btn){document.querySelectorAll('.sub').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
+
+  function carregarDados(mostrarErro=true){
+    fetch(`${URL_API}?_=${Date.now()}`).then(r=>r.json()).then(data=>{
+      banco=data; prepararSelecoes(); montarRodadasPalpites(); renderRanking();
+      if(document.getElementById('galera').classList.contains('active')) montarGalera();
+    }).catch(e=>{if(mostrarErro) alert('Erro ao carregar dados. Verifique a URL do Apps Script.')});
+  }
+
+  function prepararSelecoes(){
+    const c=document.getElementById('selectCampeao'), v=document.getElementById('selectVice');
+    c.innerHTML='<option value="">-- Escolha --</option>'; v.innerHTML='<option value="">-- Escolha --</option>';
+    (banco.selecoes||[]).forEach(s=>{c.innerHTML+=`<option value="${s}">${s}</option>`;v.innerHTML+=`<option value="${s}">${s}</option>`});
+    const meu=(banco.palpites||[]).find(p=>p.nome.toLowerCase()===usuarioLogado.toLowerCase() && p.jogo.toUpperCase().startsWith('PÓDIO:'));
+    if(meu){const partes=meu.jogo.replace('PÓDIO:','').trim().split(' X ');c.value=partes[0]||'';v.value=partes[1]||'';}
+    const aviso=document.getElementById('podioAviso');
+    if(banco.copaJaIniciou){
+      document.getElementById('podioForm').style.display='none';
+      let txt='🔒 A Copa já começou. Os palpites de campeão e vice-campeão estão encerrados.';
+      if(meu){
+        const partes=meu.jogo.replace('PÓDIO:','').trim().split(' X ');
+        txt += `<br><br>Seu palpite:<br>🏆 <strong>Campeão:</strong> ${partes[0]||'-'}<br>🥈 <strong>Vice-campeão:</strong> ${partes[1]||'-'}`;
+      }
+      aviso.innerHTML=`<div class="locked">${txt}</div>`;
+    }
+    else{document.getElementById('podioForm').style.display='grid';aviso.innerHTML='<div class="okbox">✅ Você ainda pode escolher ou alterar campeão e vice.</div>'}
+  }
+
+  function enviarPodio(){
+    const c=document.getElementById('selectCampeao').value, v=document.getElementById('selectVice').value;
+    if(!c || !v) return alert('Selecione campeão e vice.'); if(c===v) return alert('Campeão e vice não podem ser iguais.');
+    setBtn('btnPodio',true,'<i class="fa-solid fa-crown"></i> Salvar Campeão e Vice');
+    postJson({tipo:'Podio Longo Prazo',nome:usuarioLogado,campeao:c,vice:v}).then(()=>{show('Campeão e vice salvos!');carregarDados();}).catch(e=>alert('🚫 '+e.message)).finally(()=>setBtn('btnPodio',false,'<i class="fa-solid fa-crown"></i> Salvar Campeão e Vice'));
+  }
+
+  function montarRodadasPalpites(){
+    const rounds=[...new Set((banco.jogos||[]).map(j=>j.rodada).filter(Boolean))]; const cont=document.getElementById('roundsPalpites'); cont.innerHTML='';
+    rounds.forEach((r,i)=>{const b=document.createElement('button');b.className='round '+((!rodadaPalpiteAtual&&i===0)||rodadaPalpiteAtual===r?'active':'');b.innerText=r;b.onclick=()=>{rodadaPalpiteAtual=r;document.querySelectorAll('#roundsPalpites .round').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderJogos(r)};cont.appendChild(b)});
+    if(!rodadaPalpiteAtual && rounds[0]) rodadaPalpiteAtual=rounds[0]; renderJogos(rodadaPalpiteAtual);
+  }
+
+  function renderJogos(rodada){
+    const cont=document.getElementById('listaJogos'); cont.innerHTML='';
+    const jogos=(banco.jogos||[]).filter(j=>j.rodada===rodada);
+    if(jogos.length===0){cont.innerHTML='<div class="loading">Nenhum jogo nesta rodada.</div>';return}
+    jogos.forEach(j=>{
+      const meu=(banco.palpites||[]).find(p=>p.nome.toLowerCase()===usuarioLogado.toLowerCase() && String(p.jogo)===String(j.id));
+      const valA=meu?meu.placarA:''; const valB=meu?meu.placarB:''; const lock=j.bloqueado;
+      const div=document.createElement('div'); div.className='match '+(lock?'locked-game':'');
+      div.innerHTML=`<div class="match-top"><span>${j.grupo||''} • ${formatData(j.data)} ${j.horario}</span><span>${j.status||''}</span></div><div class="match-body" data-id="${j.id}"><div class="teamA">${j.timeA}</div><input class="score" type="number" inputmode="numeric" min="0" id="a_${j.id}" value="${valA}" ${lock?'disabled':''}><div class="vs">X</div><input class="score" type="number" inputmode="numeric" min="0" id="b_${j.id}" value="${valB}" ${lock?'disabled':''}><div class="teamB">${j.timeB}</div></div><div class="status-mini">${lock?'🔒 Palpite encerrado':'✅ Aberto para palpite'}</div>`;
+      cont.appendChild(div);
+    });
+  }
+
+  function enviarPalpitesJogos(){
+    const blocos=[...document.querySelectorAll('#listaJogos .match-body')]; let lista=[];
+    for(const b of blocos){const id=b.dataset.id; const a=document.getElementById('a_'+id); const c=document.getElementById('b_'+id); if(!a||!c||a.disabled) continue; if(a.value!==''&&c.value!==''){const pa=Number(a.value),pb=Number(c.value); if(pa<0||pb<0||!Number.isInteger(pa)||!Number.isInteger(pb)) return alert('Use apenas números inteiros e positivos.'); lista.push({tipo:'Placar Jogo',nome:usuarioLogado,idJogo:id,placarA:pa,placarB:pb});}}
+    if(lista.length===0) return alert('Preencha pelo menos um placar completo.');
+    setBtn('btnSalvarJogos',true,'<i class="fa-solid fa-cloud-arrow-up"></i> Salvar Palpites da Rodada');
+    Promise.all(lista.map(postJson)).then(()=>{show(`${lista.length} palpite(s) salvo(s)!`);carregarDados();}).catch(e=>alert('🚫 '+e.message)).finally(()=>setBtn('btnSalvarJogos',false,'<i class="fa-solid fa-cloud-arrow-up"></i> Salvar Palpites da Rodada'));
+  }
+
+  function montarGalera(){
+    renderGaleraPodio();
+    const rounds=[...new Set((banco.jogos||[]).map(j=>j.rodada).filter(Boolean))]; const cont=document.getElementById('roundsGalera'); cont.innerHTML='';
+    rounds.forEach((r,i)=>{const b=document.createElement('button');b.className='round '+((!rodadaGaleraAtual&&i===0)||rodadaGaleraAtual===r?'active':'');b.innerText=r;b.onclick=()=>{rodadaGaleraAtual=r;document.querySelectorAll('#roundsGalera .round').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderGalera(r)};cont.appendChild(b)});
+    if(!rodadaGaleraAtual && rounds[0]) rodadaGaleraAtual=rounds[0]; renderGalera(rodadaGaleraAtual);
+  }
+
+
+  function renderGaleraPodio(){
+    const el=document.getElementById('galeraPodio');
+    if(!el) return;
+    const ps=(banco.palpites||[]).filter(p=>String(p.jogo).toUpperCase().startsWith('PÓDIO:')).sort((a,b)=>a.nome.localeCompare(b.nome));
+    if(ps.length===0){el.innerHTML='<div style="color:#94a3b8">Ninguém escolheu campeão e vice ainda.</div>';return}
+    let rows='';
+    ps.forEach(p=>{
+      const partes=String(p.jogo).replace('PÓDIO:','').trim().split(' X ');
+      rows+=`<tr><td>${p.nome}</td><td>🏆 ${partes[0]||'-'}</td><td>🥈 ${partes[1]||'-'}</td><td class="right pts">${p.pontos!==''?'+'+p.pontos:'-'}</td></tr>`;
+    });
+    el.innerHTML=`<table class="table"><thead><tr><th>Participante</th><th>Campeão</th><th>Vice</th><th class="right">Pts</th></tr></thead><tbody>${rows}</tbody></table>`;
+  }
+
+  function renderGalera(rodada){
+    const grid=document.getElementById('gridGalera'); grid.innerHTML=''; const jogos=(banco.jogos||[]).filter(j=>j.rodada===rodada);
+    jogos.forEach(j=>{const ps=(banco.palpites||[]).filter(p=>String(p.jogo)===String(j.id)); let rows='';
+      if(ps.length===0) rows='<tr><td colspan="3" style="text-align:center;color:#94a3b8">Ninguém palpitou ainda.</td></tr>'; else ps.sort((a,b)=>a.nome.localeCompare(b.nome)).forEach(p=>{rows+=`<tr><td>${p.nome}</td><td class="right"><strong>${p.placarA} x ${p.placarB}</strong></td><td class="right pts">${p.pontos!==''?'+'+p.pontos:'-'}</td></tr>`});
+      const div=document.createElement('div');div.className='galera-card';div.innerHTML=`<div class="galera-head"><span>${formatData(j.data)} ${j.horario}</span><span>${j.status}</span></div><div class="galera-title">${j.timeA} x ${j.timeB}</div><table class="table"><tbody>${rows}</tbody></table>`;grid.appendChild(div);
+    });
+  }
+
+  function renderRanking(){
+    const body=document.getElementById('rankingBody'), pod=document.getElementById('podium'); body.innerHTML='';pod.innerHTML=''; const r=[...(banco.ranking||[])].sort((a,b)=>b.pontos-a.pontos);
+    if(r.length===0){body.innerHTML='<tr><td colspan="3" style="text-align:center;color:#94a3b8">Sem pontuação ainda.</td></tr>';return}
+    const p1=r[0]||{nome:'-',pontos:0},p2=r[1]||{nome:'-',pontos:0},p3=r[2]||{nome:'-',pontos:0};
+    pod.innerHTML=`<div class="step second"><div class="name">${p2.nome}</div><div class="block">🥈<br>2º<br>${p2.pontos} pts</div></div><div class="step first"><div class="name">${p1.nome}</div><div class="block">👑<br>1º<br>${p1.pontos} pts</div></div><div class="step third"><div class="name">${p3.nome}</div><div class="block">🥉<br>3º<br>${p3.pontos} pts</div></div>`;
+    r.forEach((u,i)=>body.innerHTML+=`<tr><td>${i+1}º</td><td><strong>${u.nome}</strong></td><td class="right pts">${u.pontos} pts</td></tr>`);
+  }
+
+  function exportarRodadaGalera(){copiarTexto(montarTextoExportacao((banco.jogos||[]).filter(j=>j.rodada===rodadaGaleraAtual), `🏆 BOLÃO COPA 2026\n${rodadaGaleraAtual||''}`))}
+  function exportarJogosDoDia(){const hoje=new Date().toISOString().slice(0,10);const jogos=(banco.jogos||[]).filter(j=>j.data===hoje); if(jogos.length===0) return alert('Não encontrei jogos com a data de hoje.'); copiarTexto(montarTextoExportacao(jogos,'🏆 BOLÃO COPA 2026\nJogos de hoje'))}
+  function montarTextoExportacao(jogos,titulo){let txt=titulo+'\n'; jogos.forEach(j=>{txt+=`\n⚽ ${j.timeA} x ${j.timeB}\n`; const ps=(banco.palpites||[]).filter(p=>String(p.jogo)===String(j.id)).sort((a,b)=>a.nome.localeCompare(b.nome)); if(ps.length===0) txt+='Sem palpites ainda.\n'; else ps.forEach(p=>txt+=`${p.nome}: ${p.placarA} x ${p.placarB}${p.pontos!==''?' (+'+p.pontos+')':''}\n`)}); return txt}
+  function copiarTexto(txt){navigator.clipboard.writeText(txt).then(()=>show('Texto copiado para enviar no WhatsApp!')).catch(()=>prompt('Copie o texto abaixo:',txt))}
+
+
+  function mostrarFasesFinais(){
+    alert('Estrutura da Copa 2026:\\n\\n• 12 grupos com 4 seleções\\n• Avançam: 1º e 2º de cada grupo + 8 melhores terceiros\\n• Depois: 16 avos/Round of 32, oitavas, quartas, semifinal, 3º lugar e final\\n\\nNa planilha, deixe rodadas prontas como: 16 avos, Oitavas, Quartas, Semifinal, 3º Lugar e Final. Os confrontos com melhores terceiros dependem da combinação oficial dos classificados e podem ser preenchidos manualmente quando a fase de grupos acabar.');
+  }
+
+  function postJson(obj){return fetch(URL_API,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(obj)}).then(r=>r.json()).then(res=>{if(!res.sucesso) throw new Error(res.erro||'Não foi possível salvar.'); return res})}
+  function formatData(d){if(!d)return''; const [y,m,day]=d.split('-'); return `${day}/${m}/${y}`}
+</script>
+</body>
+</html>
