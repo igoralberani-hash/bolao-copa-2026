@@ -346,6 +346,99 @@
       #jogos.active{padding-bottom:76px;}
     }
 
+
+    /* V17 - Ajuste mobile da Tabela da Copa */
+    @media(max-width:820px){
+      #tabela .card{
+        padding:12px 8px;
+        border-radius:18px;
+      }
+      #tabela h2{
+        font-size:22px;
+        line-height:1.15;
+        padding:0 4px;
+      }
+      #tabela .subtitle{
+        font-size:13px;
+        padding:0 4px;
+        margin-bottom:14px;
+      }
+      .standings-grid{
+        gap:14px;
+      }
+      .group-card{
+        padding:10px 8px;
+        border-radius:16px;
+        overflow:hidden;
+      }
+      .group-title{
+        font-size:18px;
+        margin-bottom:8px;
+      }
+      .standings-table{
+        display:table;
+        width:100%;
+        table-layout:fixed;
+        overflow:visible;
+      }
+      .standings-table th,
+      .standings-table td{
+        padding:7px 2px;
+        font-size:10.5px;
+        line-height:1.15;
+        white-space:nowrap;
+      }
+      .standings-table th{
+        font-size:9px;
+        letter-spacing:.2px;
+      }
+      .standings-table th:nth-child(1),
+      .standings-table td:nth-child(1){width:22px;}
+      .standings-table th:nth-child(2),
+      .standings-table td:nth-child(2){width:auto;}
+      .standings-table th:nth-child(n+3),
+      .standings-table td:nth-child(n+3){width:24px;}
+      .standings-table .team-cell{
+        min-width:0;
+        width:auto;
+        font-size:10.5px;
+        white-space:normal;
+        word-break:normal;
+        line-height:1.15;
+      }
+      .standings-table .flag-team{
+        gap:4px;
+        justify-content:flex-start;
+      }
+      .standings-table .flag-img{
+        width:18px;
+        height:13px;
+        border-radius:2px;
+      }
+      .standings-games{
+        gap:7px;
+        margin-top:10px;
+      }
+      .standings-game{
+        grid-template-columns:1fr;
+        gap:4px;
+        padding:8px 6px;
+        font-size:11px;
+        text-align:center;
+      }
+      .standings-game .home,
+      .standings-game .away{
+        text-align:center;
+        font-size:11px;
+      }
+      .standings-game .scoreline{
+        justify-self:center;
+        min-width:140px;
+        padding:5px 8px;
+        font-size:11px;
+      }
+    }
+
   </style>
 </head>
 <body>
